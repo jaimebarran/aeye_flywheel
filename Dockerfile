@@ -33,4 +33,4 @@ ENTRYPOINT ["python","/flywheel/v0/run.py"]
 # docker push jaimebarran/fw_gear_aeye_test
 
 # test locally
-# fw gear local --nifti=I_Kopf_t1_mpr_tra_iso_p2.nii.gz --measurement="T1" --debug=true
+# fw gear local --nifti=I_Kopf_t1_mpr_tra_iso_p2.nii.gz --measurement="auto-detect" --debug=true

@@ -6,7 +6,11 @@ from flywheel import GearContext
 # from flywheel_gear_toolkit import GearToolkitContext
 
 import os
-# import json
+import json
+import logging
+from pprint import pprint
+
+log = logging.getLogger(__name__)
 
 # DEFINE VARIABLES
 FLYWHEEL_BASE = "/flywheel/v0"
@@ -31,42 +35,54 @@ def parse_config(
     # Get config settings
     config_measurement = gear_context.config['measurement']
     config_debug = gear_context.config['debug']
-    print(f"measurement: {config_measurement}")
-    print(f"debug: {config_debug}")
+    pprint(config_measurement)
+    pprint(config_debug)
+
+    # Get input file
+    input_file = gear_context.get_input_path('nifti')
+    pprint(input_file)
 
     # Determine measurement
     # Check if autodetect, otherwise use config.json/manifest.json
-    # if config_measurement == 'auto-detect':
+    if config_measurement == 'auto-detect':
 
-    #     # Get measurement from context
-    #     with open(CONFIG_FILE, 'r') as f:
-    #         config_data = json.load(f)
-    #         intent = config_data['inputs']['nifti']['object']['classification']['Intent'][0]
-    #         measurement = config_data['inputs']['nifti']['object']['classification']['Measurement'][0]
+        # # Get measurement from context
+        # with open(CONFIG_FILE, 'r') as f:
+        #     config_data = json.load(f)
+        #     intent = config_data['inputs']['nifti']['object']['classification']['Intent'][0]
+        #     pprint(intent)
+        #     measurement = config_data['inputs']['nifti']['object']['classification']['Measurement'][0]
+        #     pprint(measurement)
 
-    #     if intent == 'Functional':
-    #         config_measurement = 'functional'
-    #     elif intent == 'Structural':
-    #         if measurement == 'T1':
-    #             config_measurement = 't1'
-    #         elif measurement == 'T2':
-    #             config_measurement = 't2'
+        # Get measurement from context
+        intent = gear_context.get_input('nifti')['object']['classification']['Intent']
+        pprint(intent)
+        measurement = gear_context.get_input('nifti')['object']['classification']['Measurement']
+        pprint(measurement)
+        modality = gear_context.get_input('nifti')['object']['modality']
+        pprint(modality)
 
-    input_file = gear_context.get_input_path('nifti')
-    print(f"input: {input_file}")
+        # {
+        # 'base': 'file',
+        # 'hierarchy': {'id': 'aex', 'type': 'acquisition'},
+        # 'location': {'name': 'I_Kopf_t1_mpr_tra_iso_p2.nii.gz',
+        #             'path': '/flywheel/v0/input/nifti/I_Kopf_t1_mpr_tra_iso_p2.nii.gz'},
+        # 'object': {'classification': {'Intent': [], 'Measurement': []},
+        #             'info': {},
+        #             'measurements': [],
+        #             'mimetype': '',
+        #             'modality': '',
+        #             'size': 8703369,
+        #             'tags': [],
+        #             'type': ''}
+        # }
 
-    # # Get input_file
-    # # Find input file in input directory with the extension .nii, .nii.gz
-    # input_file = [
-    #     f for f in os.listdir(INPUT_DIR) if f.endswith((".nii", ".nii.gz"))
-    # ]
-
-    # # If input file not found, raise error
-    # if not input_file:
-    #     print(
-    #         f"No Nifti files (.nii or .nii.gz) were found \
-    #         within input directory {INPUT_DIR}"
-    #     )
-    #     exit(17)
+        if intent == 'Functional':
+            config_measurement = 'functional'
+        elif intent == 'Structural':
+            if measurement == 'T1':
+                config_measurement = 't1'
+            elif measurement == 'T2':
+                config_measurement = 't2'
 
     return input_file, config_measurement, config_debug
