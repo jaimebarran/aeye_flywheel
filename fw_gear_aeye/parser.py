@@ -6,7 +6,7 @@ from flywheel import GearContext
 # from flywheel_gear_toolkit import GearToolkitContext
 
 import os
-import json
+# import json
 
 # DEFINE VARIABLES
 FLYWHEEL_BASE = "/flywheel/v0"
@@ -36,21 +36,21 @@ def parse_config(
 
     # Determine measurement
     # Check if autodetect, otherwise use config.json/manifest.json
-    if config_measurement == 'auto-detect':
+    # if config_measurement == 'auto-detect':
 
-        # Get measurement from context
-        with open(CONFIG_FILE, 'r') as f:
-            config_data = json.load(f)
-            intent = config_data['inputs']['nifti']['object']['classification']['Intent'][0]
-            measurement = config_data['inputs']['nifti']['object']['classification']['Measurement'][0]
+    #     # Get measurement from context
+    #     with open(CONFIG_FILE, 'r') as f:
+    #         config_data = json.load(f)
+    #         intent = config_data['inputs']['nifti']['object']['classification']['Intent'][0]
+    #         measurement = config_data['inputs']['nifti']['object']['classification']['Measurement'][0]
 
-        if intent == 'Functional':
-            config_measurement = 'functional'
-        elif intent == 'Structural':
-            if measurement == 'T1':
-                config_measurement = 't1'
-            elif measurement == 'T2':
-                config_measurement = 't2'
+    #     if intent == 'Functional':
+    #         config_measurement = 'functional'
+    #     elif intent == 'Structural':
+    #         if measurement == 'T1':
+    #             config_measurement = 't1'
+    #         elif measurement == 'T2':
+    #             config_measurement = 't2'
 
     input_file = gear_context.get_input_path('nifti')
     print(f"input: {input_file}")
