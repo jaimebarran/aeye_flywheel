@@ -1,0 +1,53 @@
+
+{
+  "name": "aeye",
+  "label": "AEye: Segmentation of eye tissues from T1w MR images",
+  "description": "AEye performs inference from a trained model to new T1w MR images to segment the eye tissues (lens, vitreous, optic nerve, rectus muscles, and fat) using a U-Net architecture. The model was trained on a large dataset of T1w MR images from the Study of Health in Pomerania (SHIP).",
+  "version": "0.0.0",
+  "author": "Jaime Barranco",
+  "maintainer": "Jaime Barranco <jaime.barranco-hernandez@chuv.ch>",
+  "cite": "",
+  "license": "Other",
+  "url": "https://github.com/jaimebarran/aeye_flywheel",
+  "source": "",
+  "environment": {
+    "FLYWHEEL": "/flywheel/v0"
+  },
+  "custom": {
+    "gear-builder": {
+      "category": "analysis",
+      "image": "jaimebarran/fw_gear_aeye_test:latest"
+    },
+    "flywheel": {
+      "suite": "Image Processing - Segmentation"
+    }
+  },
+  "inputs": {
+    "nifti": {
+      "description": "MRI NIfTI file. Input must be a structural image (T1) NIfTI file.",
+      "base": "file",
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    }
+  },
+  "config": {
+    "measurement": {
+      "default": "T1",
+      "description": "Measurement/Intent of input image. Must be 'T1'(default='auto-detect' - gear will attempt to automatically detect the type of input image. If input does not have a classification value, making auto-detection impossible, the gear will exit with code=17).",
+      "type": "string",
+      "enum": [
+        "auto-detect",
+        "T1"
+      ]
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable debug mode."
+    }
+  },
+  "command": "python run.py"
+}
