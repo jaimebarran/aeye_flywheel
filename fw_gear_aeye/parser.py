@@ -6,9 +6,8 @@ from flywheel import GearContext
 # from flywheel_gear_toolkit import GearToolkitContext
 
 import os
-import json
 import logging
-from pprint import pprint
+# import json
 
 log = logging.getLogger(__name__)
 
@@ -35,12 +34,12 @@ def parse_config(
     # Get config settings
     config_measurement = gear_context.config['measurement']
     config_debug = gear_context.config['debug']
-    pprint(config_measurement)
-    pprint(config_debug)
+    print("Config measurement: ", config_measurement)
+    print("Debug: ", config_debug)
 
     # Get input file
     input_file = gear_context.get_input_path('nifti')
-    pprint(input_file)
+    print("Input file: ", input_file)
 
     # Determine measurement
     # Check if autodetect, otherwise use config.json/manifest.json
@@ -56,11 +55,11 @@ def parse_config(
 
         # Get measurement from context
         intent = gear_context.get_input('nifti')['object']['classification']['Intent']
-        pprint(intent)
+        print("Intent: ", intent)
         measurement = gear_context.get_input('nifti')['object']['classification']['Measurement']
-        pprint(measurement)
+        print("Measurement: ", measurement)
         modality = gear_context.get_input('nifti')['object']['modality']
-        pprint(modality)
+        print("Modality: ", modality)
 
         # {
         # 'base': 'file',

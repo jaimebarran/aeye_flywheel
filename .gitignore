@@ -133,3 +133,4 @@ templates/
 *.nii.gz
 input/
 output/
+nnUNet/
