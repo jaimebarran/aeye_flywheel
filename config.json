@@ -1,0 +1,32 @@
+{
+    "config": {
+        "measurement": "T1",
+        "debug": true
+    },
+    "inputs": {
+        "nifti": {
+            "base": "file",
+            "location": {
+                "name": "I_Kopf_t1_mpr_tra_iso_p2.nii.gz",
+                "path": "/flywheel/v0/input/nifti/I_Kopf_t1_mpr_tra_iso_p2.nii.gz"
+            },
+            "object": {
+                "size": 8703369,
+                "type": null,
+                "mimetype": "application/octet-stream",
+                "modality": null,
+                "classification": {},
+                "tags": [],
+                "info": {},
+                "zip_member_count": null,
+                "version": 1,
+                "file_id": "",
+                "origin": {
+                    "type": "user",
+                    "id": ""
+                }
+            }
+        }
+    },
+    "destination": {}
+}
