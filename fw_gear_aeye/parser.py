@@ -34,12 +34,9 @@ def parse_config(
     # Get config settings
     config_measurement = gear_context.config['measurement']
     config_debug = gear_context.config['debug']
-    print("Config measurement: ", config_measurement)
-    print("Debug: ", config_debug)
 
     # Get input file
     input_file = gear_context.get_input_path('nifti')
-    print("Input file: ", input_file)
 
     # Determine measurement
     # Check if autodetect, otherwise use config.json/manifest.json
@@ -55,11 +52,8 @@ def parse_config(
 
         # Get measurement from context
         intent = gear_context.get_input('nifti')['object']['classification']['Intent']
-        print("Intent: ", intent)
         measurement = gear_context.get_input('nifti')['object']['classification']['Measurement']
-        print("Measurement: ", measurement)
         modality = gear_context.get_input('nifti')['object']['modality']
-        print("Modality: ", modality)
 
         # {
         # 'base': 'file',
