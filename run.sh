@@ -3,7 +3,8 @@
 IMAGE=jaimebarran/fw_gear_aeye_test:latest
 
 # Command:
-docker run --rm -v /mnt/sda1/Repos/flywheel/aeye_flywheel/input:/flywheel/v0/input -v \
+docker run --rm --gpus device=0 --shm-size=10gb -v \
+	/mnt/sda1/Repos/flywheel/aeye_flywheel/input:/flywheel/v0/input -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/output:/flywheel/v0/output -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/work:/flywheel/v0/work -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/config.json:/flywheel/v0/config.json -v \
