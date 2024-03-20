@@ -95,7 +95,7 @@
 - Run nnUNet locally
 
     ```bash
-    nnUNet_predict -i "/mnt/sda1/Repos/flywheel/aeye_flywheel/output/input" -o "/mnt/sda1/Repos/flywheel/aeye_flywheel/output/output" -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    nnUNet_predict -i "/home/jaimebarranco/Downloads/nnUNet_inference/input" -o "/home/jaimebarranco/Downloads/nnUNet_inference/output" -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
 
 - Run nnUNet through Docker pushed image
