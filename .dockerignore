@@ -1,0 +1,13 @@
+# Exclude everything
+**
+
+# Except package dirs, run.py, tests, .git and README
+!README.md
+!requirements.txt
+!manifest.json
+!run.py
+!fw_gear_aeye
+!nnUNet
+
+# Re-ignore pycache which might be inside package dir
+**/__pycache__
