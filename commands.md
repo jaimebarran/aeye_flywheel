@@ -110,6 +110,22 @@
     docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
 
+- Last command but with CDI
+
+    ```bash
+    docker run --rm --shm-size=10gb --runtime=nvidia -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest
+    -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes 
+    -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    ```
+
+- Last command but with CDI set in etc/nvidia-container-runtime/config.toml > nvidia-container-runtime > mode = "cdi" instead of "auto"
+
+    ```bash
+    docker run --rm --shm-size=10gb --runtime=nvidia -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest
+    -e NVIDIA_VISIBLE_DEVICES=all nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes 
+    -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    ```
+
 - Export environment variables (required)
 
   - nnUNet_raw

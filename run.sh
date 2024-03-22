@@ -1,9 +1,9 @@
 #!/usr/bin/env bash 
 
-IMAGE=jaimebarran/fw_gear_aeye_test:latest
+IMAGE=jaimebarran/fw_gear_aeye:0.0.0
 
 # Command:
-docker run --rm --gpus device=0 --shm-size=10gb -v \
+docker run --rm --runtime=nvidia --shm-size=10gb -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/input:/flywheel/v0/input -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/output:/flywheel/v0/output -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/work:/flywheel/v0/work -v \
@@ -11,9 +11,9 @@ docker run --rm --gpus device=0 --shm-size=10gb -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/manifest.json:/flywheel/v0/manifest.json \
 	--entrypoint=/bin/sh -e FLYWHEEL=/flywheel/v0 -e NPP_VERSION=12.2.3.2 -e SHELL=/bin/bash \
 	-e NVIDIA_VISIBLE_DEVICES=all -e DALI_BUILD=12152788 -e CUSOLVER_VERSION=11.5.4.101 -e \
-	CUBLAS_VERSION=12.3.4.1 -e CUFFT_VERSION=11.0.12.1 -e NVIDIA_REQUIRE_CUDA=cuda>=9.0 -e \
-	CUDA_CACHE_DISABLE=1 -e TENSORBOARD_PORT=6006 -e TORCH_CUDA_ARCH_LIST=5.2 6.0 6.1 7.0 \
-	7.2 7.5 8.0 8.6 8.7 9.0+PTX -e NCCL_VERSION=2.19.stable.20231214+cuda12.3 -e \
+	CUBLAS_VERSION=12.3.4.1 -e CUFFT_VERSION=11.0.12.1 -e NVIDIA_REQUIRE_CUDA="cuda>=12.0" -e \
+	CUDA_CACHE_DISABLE=1 -e TENSORBOARD_PORT=6006 -e TORCH_CUDA_ARCH_LIST="5.2 6.0 6.1 7.0 \
+	7.2 7.5 8.0 8.6 8.7 9.0+PTX" -e NCCL_VERSION=2.19.stable.20231214+cuda12.3 -e \
 	CUSPARSE_VERSION=12.2.0.103 -e ENV=/etc/shinit_v2 -e PWD=/flywheel/v0 -e \
 	OPENUCX_VERSION=1.15.0 -e NSIGHT_SYSTEMS_VERSION=2023.4.1.97 -e \
 	NVIDIA_DRIVER_CAPABILITIES=compute,utility,video -e POLYGRAPHY_VERSION=0.49.4 -e \
