@@ -12,6 +12,8 @@ sudo docker run --rm \
 	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/work:/flywheel/v0/work \
 	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/config.json:/flywheel/v0/config.json \
 	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/manifest.json:/flywheel/v0/manifest.json \
+	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/run.py:/flywheel/v0/run.py \
+	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/fw_gear_aeye/parser.py:/flywheel/v0/fw_gear_aeye/parser.py \
 	-e _=/usr/bin/printenv \
 	-e BASH_ENV=/etc/bash.bashrc \
 	-e COCOAPI_VERSION=2.0+nv0.8.0 \
