@@ -38,37 +38,13 @@ def parse_config(
     # Get input file
     input_file = gear_context.get_input_path('nifti')
 
-    # Determine measurement
-    # Check if autodetect, otherwise use config.json/manifest.json
+    # Determine measurement if auto-detect
     if config_measurement == 'auto-detect':
-
-        # # Get measurement from context
-        # with open(CONFIG_FILE, 'r') as f:
-        #     config_data = json.load(f)
-        #     intent = config_data['inputs']['nifti']['object']['classification']['Intent'][0]
-        #     pprint(intent)
-        #     measurement = config_data['inputs']['nifti']['object']['classification']['Measurement'][0]
-        #     pprint(measurement)
 
         # Get measurement from context
         intent = gear_context.get_input('nifti')['object']['classification']['Intent']
         measurement = gear_context.get_input('nifti')['object']['classification']['Measurement']
         modality = gear_context.get_input('nifti')['object']['modality']
-
-        # {
-        # 'base': 'file',
-        # 'hierarchy': {'id': 'aex', 'type': 'acquisition'},
-        # 'location': {'name': 'I_Kopf_t1_mpr_tra_iso_p2.nii.gz',
-        #             'path': '/flywheel/v0/input/nifti/I_Kopf_t1_mpr_tra_iso_p2.nii.gz'},
-        # 'object': {'classification': {'Intent': [], 'Measurement': []},
-        #             'info': {},
-        #             'measurements': [],
-        #             'mimetype': '',
-        #             'modality': '',
-        #             'size': 8703369,
-        #             'tags': [],
-        #             'type': ''}
-        # }
 
         if intent == 'Functional':
             config_measurement = 'functional'
