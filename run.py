@@ -122,6 +122,6 @@ if __name__ == "__main__":
     # Get access to gear config, inputs and sdk client if enabled
     with GearContext() as gear_context:
         # Initialize logging, set logging level based on `debug` configuration
-        gear_context.init_logging()
+        gear_context.init_logging(level="DEBUG" if gear_context.config["debug"] else "INFO")
         # Pass the gear context into main function defined above
         main(gear_context)
