@@ -3,9 +3,10 @@
 IMAGE=jaimebarran/fw_gear_aeye:0.0.0
 
 # Command:
-sudo docker run --rm \
-	--gpus device=0 \
-	--shm-size=10gb \
+podman run --rm \
+	--device nvidia.com/gpu=0 \
+	--security-opt=label=disable \
+	--shm-size=50gb \
 	--entrypoint=/bin/bash \
 	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/input:/flywheel/v0/input \
 	-v /mnt/sda1/Repos/flywheel/aeye_flywheel/output:/flywheel/v0/output \
