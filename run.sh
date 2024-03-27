@@ -3,7 +3,7 @@
 IMAGE=jaimebarran/fw_gear_aeye:0.0.0
 
 # Command:
-docker run --rm --runtime=nvidia --shm-size=10gb -v \
+sudo docker run --rm --runtime=nvidia --shm-size=10gb -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/input:/flywheel/v0/input -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/output:/flywheel/v0/output -v \
 	/mnt/sda1/Repos/flywheel/aeye_flywheel/work:/flywheel/v0/work -v \
@@ -41,4 +41,4 @@ docker run --rm --runtime=nvidia --shm-size=10gb -v \
 	nnUNet_raw_data_base=/opt/nnunet_resources/nnUNet_raw_data_base -e \
 	nnUNet_preprocessed=/opt/nnunet_resources/nnUNet_preprocessed -e \
 	RESULTS_FOLDER=/opt/nnunet_resources/nnUNet_trained_models \
-	$IMAGE -c python run.py \
+	$IMAGE -c "python run.py" \
