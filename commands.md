@@ -16,7 +16,7 @@
 
 - Run docker image interactively (remote image)
 
-    `docker run -it --rm jaimebarran/fw_gear_aeye_test /bin/bash`
+    `docker run -it --rm --entrypoint=/bin/bash jaimebarran/fw_gear_aeye:0.0.0`
 
 - List images
 
@@ -101,19 +101,19 @@
 - Run nnUNet through Docker pushed image without trained model
 
     ```bash
-    docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Desktop/nnUNet:/opt/nnunet_resources jaimebarran/fw_gear_aeye_test:latest nnUNet_predict -i /opt/nnunet_resources/nnUNet_inference/input -o /opt/nnunet_resources/nnUNet_inference/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --gpus device=0 --shm-size=10gb --entrypoint=/bin/bash -v /home/jaimebarranco/Desktop/nnUNet:/opt/nnunet_resources -e nnUNet_preprocessed=/opt/nnunet_resources/nnUNet_preprocessed -e nnUNet_raw_data_base=/opt/nnunet_resources/nnUNet_raw_data_base -e RESULTS_FOLDER=/opt/nnunet_resources/nnUNet_trained_models -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
     ```
 
 - Run nnUNet through Docker pushed image with trained model
 
     ```bash
-    docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_test:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_test:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
 
 - Run nnUNet through Docker pushed image with trained model changing the entrypoint
 
     ```bash
-    sudo docker run --rm --gpus device=all --shm-size=10gb --entrypoint=/bin/bash -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
+    sudo docker run --rm --gpus device=all --shm-size=10gb --entrypoint=/bin/bash -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
     ```
 
 ### CDI
