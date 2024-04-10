@@ -4,19 +4,19 @@
 
 - Build docker image
 
-    `docker build --no-cache -t jaimebarran/fw_gear_aeye_test .`
+    `docker build --no-cache -t jaimebarran/fw_gear_aeye .`
 
 - Push docker image
 
-    `docker push jaimebarran/fw_gear_aeye_test`
+    `docker push jaimebarran/fw_gear_aeye`
 
 - Run docker image interactively (local image)
 
-    `docker run -it --rm docker.io/jaimebarran/fw_gear_aeye_interactive /bin/bash`
+    `docker run -it --rm docker.io/jaimebarran/fw_gear_aeye /bin/bash`
 
 - Run docker image interactively (remote image)
 
-    `docker run -it --rm jaimebarran/fw_gear_aeye_interactive /bin/bash`
+    `docker run -it --rm --entrypoint=/bin/bash jaimebarran/fw_gear_aeye:0.0.1`
 
 - List images
 
@@ -98,32 +98,44 @@
     nnUNet_predict -i "/home/jaimebarranco/Downloads/nnUNet_inference/input" -o "/home/jaimebarranco/Downloads/nnUNet_inference/output" -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
 
-- Run nnUNet through Docker pushed image
+- Run nnUNet through Docker pushed image without trained model
 
     ```bash
-    docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Desktop/nnUNet:/opt/nnunet_resources jaimebarran/fw_gear_aeye_interactive:latest nnUNet_predict -i /opt/nnunet_resources/nnUNet_inference/input -o /opt/nnunet_resources/nnUNet_inference/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --gpus device=0 --shm-size=10gb --entrypoint=/bin/bash -v /home/jaimebarranco/Desktop/nnUNet:/opt/nnunet_resources -e nnUNet_preprocessed=/opt/nnunet_resources/nnUNet_preprocessed -e nnUNet_raw_data_base=/opt/nnunet_resources/nnUNet_raw_data_base -e RESULTS_FOLDER=/opt/nnunet_resources/nnUNet_trained_models -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
     ```
 
 - Run nnUNet through Docker pushed image with trained model
 
     ```bash
-    docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --gpus device=0 --shm-size=10gb -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_test:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
+
+- Run nnUNet through Docker pushed image with trained model changing the entrypoint
+
+    ```bash
+    sudo docker run --rm --gpus device=all --shm-size=10gb --entrypoint=/bin/bash -v /home/jaimebarranco/Desktop/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
+    ```
+
+### CDI
 
 - Last command but with CDI
 
     ```bash
-    docker run --rm --shm-size=10gb --runtime=nvidia -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest
-    -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes 
-    -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --runtime=nvidia --shm-size=10gb --entrypoint=/bin/bash -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=0 -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
     ```
 
 - Last command but with CDI set in etc/nvidia-container-runtime/config.toml > nvidia-container-runtime > mode = "cdi" instead of "auto"
 
     ```bash
-    docker run --rm --shm-size=10gb --runtime=nvidia -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_interactive:latest
-    -e NVIDIA_VISIBLE_DEVICES=all nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes 
-    -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
+    sudo docker run --rm --runtime=nvidia --shm-size=10gb --entrypoint=/bin/bash -e NVIDIA_VISIBLE_DEVICES=0 -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye:0.0.0 -c "nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye"
+    ```
+
+#### Podman
+
+- CDI with Podman (kind of "docker run")
+
+    ```bash
+    podman run --rm --device nvidia.com/gpu=0 --security-opt=label=disable -v /home/jaimebarranco/Downloads/nnUNet_inference:/tmp jaimebarran/fw_gear_aeye_test:latest nnUNet_predict -i /tmp/input -o /tmp/output -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 3d_fullres -p nnUNetPlansv2.1 -t Task313_Eye
     ```
 
 - Export environment variables (required)

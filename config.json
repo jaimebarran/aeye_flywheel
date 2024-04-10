@@ -1,6 +1,6 @@
 {
     "config": {
-        "measurement": "T1",
+        "measurement": "auto-detect",
         "debug": true
     },
     "inputs": {
@@ -14,8 +14,11 @@
                 "size": 8703369,
                 "type": null,
                 "mimetype": "application/octet-stream",
-                "modality": null,
-                "classification": {},
+                "modality": "MR",
+                "classification": {
+                    "Intent": "Structural",
+                    "Measurement": "T1"
+                },
                 "tags": [],
                 "info": {},
                 "zip_member_count": null,

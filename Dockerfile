@@ -20,13 +20,11 @@ ENV FLYWHEEL="/flywheel/v0"
 WORKDIR ${FLYWHEEL}
 
 # Installing main dependencies
-COPY requirements.txt ${FLYWHEEL}/requirements.txt
+COPY requirements.txt ${FLYWHEEL}/
 RUN pip install --no-cache-dir -r $FLYWHEEL/requirements.txt
 
 # Installing the current project (most likely to change, above layer can be cached)
-COPY README.md ${FLYWHEEL}/README.md
-COPY manifest.json ${FLYWHEEL}/manifest.json
-COPY run.py ${FLYWHEEL}/run.py
+COPY README.md manifest.json run.py ${FLYWHEEL}/
 COPY fw_gear_aeye ${FLYWHEEL}/fw_gear_aeye
 COPY nnUNet/nnUNet_raw_data_base $resources"/nnUNet_raw_data_base"
 COPY nnUNet/nnUNet_preprocessed $resources"/nnUNet_preprocessed"

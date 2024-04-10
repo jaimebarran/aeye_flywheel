@@ -84,7 +84,7 @@
   "custom": {
     "gear-builder": {
       "category": "analysis",
-      "image": "jaimebarran/fw_gear_aeye:0.0.0"
+      "image": "jaimebarran/fw_gear_aeye:0.0.1"
     },
     "flywheel": {
       "suite": "Image Processing - Segmentation"

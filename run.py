@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """The run script"""
 
-# import flywheel
 from flywheel import GearContext
 import logging
 import os
@@ -10,8 +9,6 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-# import json
-# import zipfile
 
 from fw_gear_aeye.parser import parse_config
 
@@ -66,21 +63,6 @@ def main(context: GearContext) -> None:
         cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE  # cwd="."
     )
 
-    # Stream the output from p.communicate so the user can monitor the progress continuously.
-    # This approach is taken from:
-    # https://gitlab.com/flywheel-io/flywheel-apps/nifti-to-dicom/-/blob/0.1.0/fw_gear_nifti_to_dicom/pixelmed.py
-    # while True:
-    #     time.sleep(5)
-    #     if process.poll() is None:
-    #         output, _ = process.communicate()
-    #         print(output.decode("utf-8").strip() + "\n")
-    #     else:
-    #         if process.returncode != 0:
-    #             log.error(
-    #                 f"AEye segmentation failed with exit_code: {process.returncode}"
-    #             )
-    #             raise SystemExit(1)
-    #         else:
     subprocess.call(cmd)
     log.info("AEye segmentation completed")
     sys.exit(process.returncode)
@@ -122,6 +104,6 @@ if __name__ == "__main__":
     # Get access to gear config, inputs and sdk client if enabled
     with GearContext() as gear_context:
         # Initialize logging, set logging level based on `debug` configuration
-        gear_context.init_logging()
+        gear_context.init_logging(level="DEBUG" if gear_context.config["debug"] else "INFO")
         # Pass the gear context into main function defined above
         main(gear_context)
