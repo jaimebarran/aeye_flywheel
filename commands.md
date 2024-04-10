@@ -4,19 +4,19 @@
 
 - Build docker image
 
-    `docker build --no-cache -t jaimebarran/fw_gear_aeye_test .`
+    `docker build --no-cache -t jaimebarran/fw_gear_aeye .`
 
 - Push docker image
 
-    `docker push jaimebarran/fw_gear_aeye_test`
+    `docker push jaimebarran/fw_gear_aeye`
 
 - Run docker image interactively (local image)
 
-    `docker run -it --rm docker.io/jaimebarran/fw_gear_aeye_test /bin/bash`
+    `docker run -it --rm docker.io/jaimebarran/fw_gear_aeye /bin/bash`
 
 - Run docker image interactively (remote image)
 
-    `docker run -it --rm --entrypoint=/bin/bash jaimebarran/fw_gear_aeye:0.0.0`
+    `docker run -it --rm --entrypoint=/bin/bash jaimebarran/fw_gear_aeye:0.0.1`
 
 - List images
 
