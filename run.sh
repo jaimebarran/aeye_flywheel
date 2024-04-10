@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 
-IMAGE=jaimebarran/fw_gear_aeye:0.0.0
+IMAGE=jaimebarran/fw_gear_aeye:0.0.1
 
 # Command:
 sudo docker run --rm \

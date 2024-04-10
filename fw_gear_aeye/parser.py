@@ -1,13 +1,10 @@
 """Parser module to parse gear config.json"""
-# from pathlib import Path
 from typing import Tuple
 
 from flywheel import GearContext
-# from flywheel_gear_toolkit import GearToolkitContext
 
 import os
 import logging
-# import json
 
 log = logging.getLogger(__name__)
 
