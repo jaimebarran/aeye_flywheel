@@ -2,7 +2,7 @@
   "name": "aeye",
   "label": "AEye: Segmentation of eye tissues from T1w MR images",
   "description": "AEye performs inference from a trained model to new T1w MR images to segment the eye tissues (lens, vitreous, optic nerve, rectus muscles, and fat) using a U-Net architecture. The model was trained on a large dataset of T1w MR images from the Study of Health in Pomerania (SHIP).",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Jaime Barranco",
   "maintainer": "Jaime Barranco <jaime.barranco-hernandez@chuv.ch>",
   "cite": "",
