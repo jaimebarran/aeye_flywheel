@@ -2,6 +2,18 @@
 
 ## Docker
 
+- Start Docker Desktop
+
+    `systemctl --user status docker-desktop`
+
+- Verify Docker status
+
+    `systemctl --user status docker-desktop`
+
+- Docker info
+
+    `docker info`
+
 - Build docker image
 
     `docker build --no-cache -t jaimebarran/fw_gear_aeye .`
