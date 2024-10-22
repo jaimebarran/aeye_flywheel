@@ -4,11 +4,11 @@
 
 - Start Docker Desktop
 
-    `systemctl --user status docker-desktop`
+    `sudo systemctl start docker`
 
 - Verify Docker status
 
-    `systemctl --user status docker-desktop`
+    `sudo systemctl status docker`
 
 - Docker info
 
